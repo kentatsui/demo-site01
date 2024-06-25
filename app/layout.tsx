@@ -8,7 +8,10 @@ import { Button } from "@/components/ui/button";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Demo-site01",
+  title: {
+    template: "%s | demo-site01",
+    default: "demo-site01",
+  },
   description: "でもデモサイト",
 };
 
@@ -24,10 +27,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="ja">
       <body className={cn(inter.className, "min-h-dvh")}>
         <header className="container h-16 flex  items-center border-b justify-between">
-          <h1 className="font-bold">LOGO</h1>
+          <h1 className="font-bold">
+            <Button variant="ghost" asChild>
+              <Link href="/">LOGO</Link>
+            </Button>
+          </h1>
           <ul className="flex gap-4">
             {navItems.map((item) => (
               <li key={item.label}>
@@ -38,9 +45,7 @@ export default function RootLayout({
             ))}
           </ul>
         </header>
-
-        {children}
-
+        <main>{children}</main>
         <footer className="container sticky top-full h-16 flex items-center border-t">
           <p>&copy; ken</p>
         </footer>
